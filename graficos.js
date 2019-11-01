@@ -113,19 +113,14 @@ function desenharGraficos(){
 
     //Grafico de Barras
 
-    var tabela = new google.visualization.DataTable();
-    tabela.addColumn('string', 'categorias');
-    tabela.addColumn('number', 'valores');
-    tabela.addColumn({type: 'string', role: 'annotation'});
-    tabela.addColumn({type: 'string', role: 'style'})
-        tabela.addRows([
-            ['Educação',2000,'R$2000,00','blue'],
-            ['Transporte', 500,'R$500,00','grey'],
-            ['Lazer', 230,'R$230,00','grey'],
-            ['Saúde', 50,'R$50,00','grey'],
-            ['Cartão de Crédito', 900,'R$900,00','#8904B1'],
-            ['Alimentação', 260,'R$260,00','grey']
-        ]);
+    var newJson = $.ajax({
+        url: 'https://gist.githubusercontent.com/alexandreSalomao22/a06a8f9bf19479b0edceee21ec771e0f/raw/c6fe88a04349d6c94fb2608c97ed13541d08d769/dados.json',
+        dataType: 'json',
+        async: false
+    }).responseText
+
+    var tabela = new google.visualization.DataTable(newJson);
+
         //ordenar pelo indice e ordernar do maior para o menor
         tabela.sort([{column: 1, desc: true}]); 
 
@@ -156,7 +151,8 @@ function desenharGraficos(){
 
         //Grafico de Barras com JSON
         var dadosJSON = $.ajax({
-            url: 'dados.json',
+            //url: 'dados.json',
+            url: 'https://gist.githubusercontent.com/alexandreSalomao22/4f7051755d5467e076a869e36cc97e5f/raw/86f7a34cd1ef65e64eced1d665ab345d06f9694a/dados.json',
             dataType: 'json',
             async: false
         }).responseText;
